@@ -1,0 +1,39 @@
+body {
+    background-color: #535353;
+  }
+  
+  header{
+    background-color: #1e1e1e;
+  }
+  
+  .alert{
+    margin-top: 20px;
+  }
+  
+  .modal-content{
+    color: #fff;
+    background-color: #535353;
+  }
+  
+  #addTask{
+    margin: 0 auto;
+  }
+  
+  #formAddTask{
+    color: #fff;
+    font-weight: bolder;
+  }
+  
+  .sectionInput{
+      margin: 10px;
+  }
+  
+  table{
+    margin: 10px 0;
+  }
+  
+  #openAddForm{
+    font-weight: bold;
+    margin-top: 10px;
+    width: 100%;
+  }

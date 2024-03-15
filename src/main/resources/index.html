@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic &lt/table&gt</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="#">Periodic &lt/table&gt</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+        
+    <div class="container">
+        <div id="msg">
+
+        </div>
+            
+        <button type="button" id="openAddForm" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#modalAdd">
+            Clique aqui para adicionar um novo elemento
+        </button>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-dark table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nº atômico</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Símbolo</th>
+                            <th scope="col">Família</th>
+                            <th scope="col" colspan="2">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasksTable" class="table-group-divider">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="color: #fff;"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="http://localhost:4567/elemento" id="formAdd" method="POST">
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="atomicNum" class="form-label">Número atômico</label>
+                                <input type="number" id="atomicNum" name="atomicNum" class="form-control" required
+                                    placeholder="Insira o número atômico do elemento">
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="elementName" class="form-label">Nome</label>
+                                <input type="text" id="elementName" name="elementName" class="form-control" required
+                                    placeholder="Insira o nome do elemento">
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="" class="form-label">Símbolo</label>
+                                <input type="text" id="symbol" name="symbol" class="form-control" required
+                                    placeholder="Insira o símbolo do elemento" maxlength="2">
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+
+                            <section class="col sectionInput">
+                                <label for="family" class="form-label">Família</label>
+                                <select name="priority" id="family" name="family" class="form-select" required>
+                                    <option value="Metais alcalinos">Metais alcalinos</option>
+                                    <option value="Metais alcalinos terrosos">Metais alcalinos terrosos</option>
+                                    <option value="Metais de transição">Metais de transição</option>
+                                    <option value="Família do Boro">Família do Boro</option>
+                                    <option value="Família do Carbono">Família do Carbono</option>
+                                    <option value="Família do Nitrogênio">Família do Nitrogênio</option>
+                                    <option value="Calcogênios">Calcogênios</option>
+                                    <option value="Halogênios">Halogênios</option>
+                                    <option value="Gases nobres">Gases nobres</option>
+                                    <option value="Lantanídeos">Lantanídeos</option>
+                                    <option value="Actinídeos">Actinídeos</option>
+                                    <option value="Hidrogênio">Hidrogênio</option>
+                                </select>
+                            </section>
+                        </div>
+
+                        <button>add</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCreate" class="btn btn-secondary">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="color: #fff;"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formEditTask" method="PUT">
+                        <input type="hidden" id="idEditInput">
+                        <input type="hidden" id="statusEditInput">
+                        <input type="hidden" id="lateEditInput">
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="titleEditInput class="form-label">Título</label>
+                                <input type="text" id="titleEditInput" class="form-control" required
+                                    placeholder="Insira o título da tarefa">
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="descriptionEditInput" class="form-label">Descrição</label>
+                                <textarea name="" id="descriptionEditInput" class="form-control" rows="3" required
+                                    maxlength="250" placeholder="Insira a descrição da tarefa"></textarea>
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col sectionInput">
+                                <label for="dateEditInput" class="form-label">Data de entrega</label>
+                                <input type="datetime-local" id="dateEditInput" class="form-control" required>
+                                <div class="invalid-feedback">Este campo é obrigatório</div>
+                            </section>
+
+                            <section class="col sectionInput">
+                                <label for="priorityEditInput" class="form-label">Prioridade</label>
+                                <select name="priority" id="priorityEditInput" class="form-select" required>
+                                    <option value="high">ALTA</option>
+                                    <option value="mid">MÉDIA</option>
+                                    <option value="low">BAIXA</option>
+                                </select>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnEditTask" class="btn btn-secondary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDeleteTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Excluir tarefa?</h5>
+                </div>
+                <form>
+                    <input type="hidden" id="inputDeleteId">
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnDeleteTask" class="btn btn-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</body>
+
+</html>
